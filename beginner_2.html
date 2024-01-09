@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Social Network</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-around;
+            padding: 2em;
+        }
+
+        .user-profile {
+            text-align: center;
+            padding: 1em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 1em;
+            width: 200px;
+        }
+
+        .friend-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .friend-list-item {
+            margin: 0.5em;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Simple Social Network</h1>
+    </header>
+
+    <section>
+        <div class="user-profile" id="user1">
+            <h2>User 1</h2>
+            <p>Status: Online</p>
+            <ul class="friend-list">
+                <li class="friend-list-item">Friend 1</li>
+                <li class="friend-list-item">Friend 2</li>
+            </ul>
+            <button onclick="addFriend('user1', 'user2')">Add Friend</button>
+        </div>
+
+        <div class="user-profile" id="user2">
+            <h2>User 2</h2>
+            <p>Status: Offline</p>
+            <ul class="friend-list">
+                <li class="friend-list-item">Friend 1</li>
+            </ul>
+            <button onclick="addFriend('user2', 'user1')">Add Friend</button>
+        </div>
+    </section>
+
+    <script>
+        function addFriend(user1, user2) {
+            const user1Profile = document.getElementById(user1);
+            const user2Profile = document.getElementById(user2);
+
+            const friendListItem = document.createElement('li');
+            friendListItem.textContent = user1;
+
+            user2Profile.querySelector('.friend-list').appendChild(friendListItem);
+
+            const friendListItem2 = document.createElement('li');
+            friendListItem2.textContent = user2;
+
+            user1Profile.querySelector('.friend-list').appendChild(friendListItem2);
+        }
+    </script>
+
+</body>
+</html>
