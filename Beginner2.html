@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .flashcard-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="flashcard-container">
+        <div id="question">What is the capital of France?</div>
+        <div id="options">
+            <div class="option" onclick="checkAnswer('Paris')">Paris</div>
+            <div class="option" onclick="checkAnswer('Berlin')">Berlin</div>
+            <div class="option" onclick="checkAnswer('London')">London</div>
+            <div class="option" onclick="checkAnswer('Rome')">Rome</div>
+        </div>
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "What is the capital of France?", options: ["Paris", "Berlin", "London", "Rome"], correctAnswer: "Paris" },
+            { question: "Which planet is known as the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], correctAnswer: "Mars" },
+            // Add more questions as needed
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+
+            questionElement.textContent = questions[currentQuestionIndex].question;
+
+            optionsElement.innerHTML = "";
+            for (const option of questions[currentQuestionIndex].options) {
+                const optionElement = document.createElement("div");
+                optionElement.className = "option";
+                optionElement.textContent = option;
+                optionElement.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(optionElement);
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            const feedbackElement = document.getElementById("feedback");
+            const correctAnswer = questions[currentQuestionIndex].correctAnswer;
+
+            if (selectedOption === correctAnswer) {
+                feedbackElement.textContent = "Correct! 🎉";
+            } else {
+                feedbackElement.textContent = `Incorrect. The correct answer is: ${correctAnswer}.`;
+            }
+
+            setTimeout(() => {
+                feedbackElement.textContent = "";
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    alert("Quiz completed! 🎉");
+                    resetQuiz();
+                }
+            }, 2000);
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            displayQuestion();
+        }
+
+        // Initial display
+        displayQuestion();
+    </script>
+</body>
+</html>

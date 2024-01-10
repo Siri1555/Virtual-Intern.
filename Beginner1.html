@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #workoutLog {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fitness Tracker</h1>
+        <div id="workoutForm">
+            <label for="workout">Workout:</label>
+            <input type="text" id="workout" placeholder="e.g., Running, Cycling" required>
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" required>
+            <button onclick="logWorkout()">Log Workout</button>
+        </div>
+        <div id="workoutLog">
+            <h2>Workout Log</h2>
+            <ul id="logList"></ul>
+        </div>
+    </div>
+
+    <script>
+        function logWorkout() {
+            var workout = document.getElementById("workout").value;
+            var duration = document.getElementById("duration").value;
+
+            if (workout && duration) {
+                var logList = document.getElementById("logList");
+                var listItem = document.createElement("li");
+                listItem.innerHTML = `<strong>${workout}</strong> - ${duration} minutes`;
+                logList.appendChild(listItem);
+
+                // You can add code here to send the data to the server and store it in a database
+            } else {
+                alert("Please enter both workout and duration.");
+            }
+        }
+    </script>
+</body>
+</html>
